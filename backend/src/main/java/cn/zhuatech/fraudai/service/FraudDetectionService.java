@@ -36,6 +36,27 @@ public class FraudDetectionService {
         return new Result(request.transactionNo(), score, decision, nextStep, reasons, true);
     }
 
+    public LinkRiskResult analyzeLinks(LinkRiskRequest request) {
+        int score = Math.min(100,
+            Math.min(request.sharedDeviceAccounts() * 6, 30)
+                + Math.min(request.sharedIpAccounts() * 3, 15)
+                + Math.min(request.highRiskNeighbors() * 12, 36)
+                + Math.min(request.suspiciousTransactions24Hours() * 4, 20)
+                + (request.deviceFingerprintChanged() ? 10 : 0));
+        String clusterLevel = score >= 70 ? "HIGH" : score >= 40 ? "MEDIUM" : "LOW";
+        String action = score >= 70 ? "HOLD_AND_INVESTIGATE"
+            : score >= 40 ? "CHALLENGE_AND_MONITOR" : "MONITOR";
+        List<String> evidence = new ArrayList<>();
+        if (request.sharedDeviceAccounts() >= 5) evidence.add("同设备关联账户数量异常");
+        if (request.highRiskNeighbors() > 0) evidence.add("关联网络中存在已知高风险账户");
+        if (request.suspiciousTransactions24Hours() >= 3) evidence.add("关联账户短时可疑交易集中");
+        if (request.deviceFingerprintChanged()) evidence.add("设备指纹近期发生显著变化");
+        if (evidence.isEmpty()) evidence.add("未发现显著的账户设备聚集风险");
+        int reviewPriority = Math.min(5, Math.max(1, (score + 19) / 20));
+        return new LinkRiskResult(request.subjectAccount(), score, clusterLevel, action,
+            reviewPriority, evidence, request.sharedDeviceAccounts() + request.sharedIpAccounts());
+    }
+
     public record Request(@NotBlank String transactionNo,
                           @DecimalMin("0.01") BigDecimal amount,
                           @DecimalMin("0.01") BigDecimal customerAverageAmount,
@@ -46,4 +67,14 @@ public class FraudDetectionService {
     public record Result(String transactionNo, int riskScore, String decision,
                          String nextStep, List<String> reasons,
                          boolean manualReviewSupported) {}
+    public record LinkRiskRequest(@NotBlank String subjectAccount,
+                                  @Min(0) int sharedDeviceAccounts,
+                                  @Min(0) int sharedIpAccounts,
+                                  @Min(0) int highRiskNeighbors,
+                                  @Min(0) int suspiciousTransactions24Hours,
+                                  boolean deviceFingerprintChanged) {}
+    public record LinkRiskResult(String subjectAccount, int networkRiskScore,
+                                 String clusterRiskLevel, String recommendedAction,
+                                 int reviewPriority, List<String> evidence,
+                                 int observedLinkCount) {}
 }

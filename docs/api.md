@@ -10,6 +10,7 @@
 | GET | `/api/shopfloor/dashboard` | 交易风控运营台 |
 | POST | `/api/shopfloor/work-orders/{id}/reports` | 提交处理反馈 |
 | POST | `/api/ai/fraud/assess` | 交易风险评分、决策和解释原因 |
+| POST | `/api/ai/fraud/link-risk` | 账户、设备、IP 关联网络风险与调查优先级 |
 | POST | `/api/shopfloor/ai-risk-assessment` | AI 功能上线风险初筛 |
 
 除登录外均需 `Authorization: Bearer <token>`。社区演示实现不调用外部模型，不需要 API Key。

@@ -18,4 +18,10 @@ public class FraudDetectionController {
     public ApiResponse<FraudDetectionService.Result> assess(@Valid @RequestBody FraudDetectionService.Request request) {
         return ApiResponse.ok("交易风险评估完成", service.assess(request));
     }
+
+    @PostMapping("/link-risk")
+    public ApiResponse<FraudDetectionService.LinkRiskResult> analyzeLinks(
+        @Valid @RequestBody FraudDetectionService.LinkRiskRequest request) {
+        return ApiResponse.ok("账户设备关联风险分析完成", service.analyzeLinks(request));
+    }
 }

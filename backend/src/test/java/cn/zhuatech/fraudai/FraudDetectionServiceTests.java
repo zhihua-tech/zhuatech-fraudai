@@ -22,4 +22,12 @@ class FraudDetectionServiceTests {
         assertThat(result.decision()).isEqualTo("ALLOW");
         assertThat(result.nextStep()).contains("正常放行");
     }
+
+    @Test void identifiesHighRiskAccountDeviceCluster() {
+        var result = service.analyzeLinks(new FraudDetectionService.LinkRiskRequest(
+            "ACC-8842", 9, 6, 2, 5, true));
+        assertThat(result.clusterRiskLevel()).isEqualTo("HIGH");
+        assertThat(result.recommendedAction()).isEqualTo("HOLD_AND_INVESTIGATE");
+        assertThat(result.evidence()).anyMatch(item -> item.contains("高风险账户"));
+    }
 }
