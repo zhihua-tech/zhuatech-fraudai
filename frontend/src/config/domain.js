@@ -1,4 +1,4 @@
-/* Copyright 2026 上海如静知华信息科技有限公司 */
+/* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 export const domain={
  code:'FRAUDAI',systemName:'知华交易反欺诈 AI 平台',englishName:'AI FRAUD DETECTION',theme:{primary:'#624d67',dark:'#332b3a',accent:'#c48245'},
  workspace:'风险管理中心 / 智能风控组',fieldWorkspace:'支付安全 / 调查一组',period:'2026-08-15 · 实时风控',liveText:'交易风险流于 10:39 更新',fieldContextLabel:'值守周期',fieldContext:'白班 08:00—20:00',fieldUser:'沈知微',fieldRole:'风险调查员',adminUser:'罗谨',adminRole:'反欺诈负责人',

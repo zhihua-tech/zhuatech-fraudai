@@ -1,4 +1,4 @@
-/* Copyright 2026 上海如静知华信息科技有限公司 */
+/* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 package cn.zhuatech.fraudai.service;
 import cn.zhuatech.fraudai.common.BusinessException; import cn.zhuatech.fraudai.dto.FraudAiDto.*; import cn.zhuatech.fraudai.model.*; import cn.zhuatech.fraudai.repository.*; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.util.*;
 @Service @Transactional(readOnly=true) public class FraudAiService {
