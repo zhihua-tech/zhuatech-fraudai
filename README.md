@@ -56,3 +56,7 @@ npm run dev:demo
 | ![微信咨询二维码一](docs/images/zhuatech-wechat-consulting.png) | ![微信咨询二维码二](docs/images/zhuatech-wechat-consulting-2.png) |
 
 [访问知华科技官网](https://www.zhuatech.cn/) · SEO：AI 反欺诈、交易风控、Fraud Detection、账户接管检测、Java 风控平台源码、知华科技。
+
+## 企业级反欺诈决策发布
+
+新增 `POST /api/enterprise/fraudai/fraud-decision-release`，覆盖阈值、误报、公平性、解释、数据、人工复核、审批、监控和回滚，返回 `RELEASE / SHADOW / BLOCKED`。详见 [决策发布说明](docs/ENTERPRISE_FRAUD_DECISION_RELEASE.md)。
