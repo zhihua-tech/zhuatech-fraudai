@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 class FraudDetectionServiceTests {
     private final FraudDetectionService service = new FraudDetectionService();
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void blocksImpossibleTravelAndVelocitySpike() {
         var result = service.assess(new FraudDetectionService.Request("TX-001", new BigDecimal("18000"),
             new BigDecimal("1200"), 11, 82, 75, true, true));
@@ -16,6 +22,9 @@ class FraudDetectionServiceTests {
         assertThat(result.riskScore()).isGreaterThanOrEqualTo(70);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void allowsNormalReturningTransaction() {
         var result = service.assess(new FraudDetectionService.Request("TX-002", new BigDecimal("600"),
             new BigDecimal("800"), 1, 10, 8, false, false));
@@ -23,6 +32,9 @@ class FraudDetectionServiceTests {
         assertThat(result.nextStep()).contains("正常放行");
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void identifiesHighRiskAccountDeviceCluster() {
         var result = service.analyzeLinks(new FraudDetectionService.LinkRiskRequest(
             "ACC-8842", 9, 6, 2, 5, true));

@@ -8,8 +8,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class FraudDecisionReleaseService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Assessment assess(Request request) {
         List<String> blockers = new ArrayList<>();
         List<String> actions = new ArrayList<>();
@@ -34,6 +40,9 @@ public class FraudDecisionReleaseService {
         return new Assessment(Decision.RELEASE, blockers, actions);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Request(@NotBlank String modelVersion, boolean thresholdValidated,
                           @DecimalMin("0.0") double falsePositiveRate,
                           @DecimalMin("0.0") double maxFalsePositiveRate,
@@ -41,6 +50,12 @@ public class FraudDecisionReleaseService {
                           boolean dataFreshnessPassed, boolean manualReviewRouteReady,
                           boolean modelApproved, boolean monitoringReady, boolean rollbackReady,
                           @Min(0) int openCriticalFindings) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Assessment(Decision decision, List<String> blockers, List<String> actions) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public enum Decision { RELEASE, SHADOW, BLOCKED }
 }

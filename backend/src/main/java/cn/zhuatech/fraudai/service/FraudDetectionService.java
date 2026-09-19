@@ -11,8 +11,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class FraudDetectionService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Result assess(Request request) {
         int score = 0;
         if (request.amount().compareTo(request.customerAverageAmount().multiply(new BigDecimal("5"))) >= 0) score += 30;
@@ -36,6 +42,9 @@ public class FraudDetectionService {
         return new Result(request.transactionNo(), score, decision, nextStep, reasons, true);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public LinkRiskResult analyzeLinks(LinkRiskRequest request) {
         int score = Math.min(100,
             Math.min(request.sharedDeviceAccounts() * 6, 30)
@@ -57,6 +66,9 @@ public class FraudDetectionService {
             reviewPriority, evidence, request.sharedDeviceAccounts() + request.sharedIpAccounts());
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Request(@NotBlank String transactionNo,
                           @DecimalMin("0.01") BigDecimal amount,
                           @DecimalMin("0.01") BigDecimal customerAverageAmount,
@@ -64,15 +76,24 @@ public class FraudDetectionService {
                           @Min(0) @Max(100) int deviceRiskScore,
                           @Min(0) @Max(100) int locationRiskScore,
                           boolean newPayee, boolean impossibleTravel) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record Result(String transactionNo, int riskScore, String decision,
                          String nextStep, List<String> reasons,
                          boolean manualReviewSupported) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record LinkRiskRequest(@NotBlank String subjectAccount,
                                   @Min(0) int sharedDeviceAccounts,
                                   @Min(0) int sharedIpAccounts,
                                   @Min(0) int highRiskNeighbors,
                                   @Min(0) int suspiciousTransactions24Hours,
                                   boolean deviceFingerprintChanged) {}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record LinkRiskResult(String subjectAccount, int networkRiskScore,
                                  String clusterRiskLevel, String recommendedAction,
                                  int reviewPriority, List<String> evidence,
