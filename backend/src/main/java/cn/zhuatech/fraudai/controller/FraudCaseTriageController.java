@@ -1,0 +1,3 @@
+/* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
+package cn.zhuatech.fraudai.controller;import cn.zhuatech.fraudai.common.ApiResponse;import cn.zhuatech.fraudai.service.FraudCaseTriageService;import jakarta.validation.Valid;import org.springframework.web.bind.annotation.*;
+@RestController@RequestMapping("/api/enterprise/fraudai")public class FraudCaseTriageController{private final FraudCaseTriageService service;public FraudCaseTriageController(FraudCaseTriageService s){service=s;}@PostMapping("/case-triage")public ApiResponse<FraudCaseTriageService.Result>triage(@Valid@RequestBody FraudCaseTriageService.Request r){return ApiResponse.ok("反欺诈案件分级完成",service.triage(r));}}

@@ -60,3 +60,7 @@ npm run dev:demo
 ## 企业级反欺诈决策发布
 
 新增 `POST /api/enterprise/fraudai/fraud-decision-release`，覆盖阈值、误报、公平性、解释、数据、人工复核、审批、监控和回滚，返回 `RELEASE / SHADOW / BLOCKED`。详见 [决策发布说明](docs/ENTERPRISE_FRAUD_DECISION_RELEASE.md)。
+
+## 告警案件分级与响应 SLA
+
+`POST /api/enterprise/fraudai/case-triage` 综合模型风险、账户接管、持续损失、金额与弱势客户保护要求，生成 `P1/P2/P3`、响应 SLA 和 `MONITOR / INVESTIGATE / CONTAIN / HOLD` 处置结论；证据不可追溯时不会自动采取正式决定。
