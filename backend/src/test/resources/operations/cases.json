@@ -1,0 +1,65 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "PASS",
+      "eligibleFrom": "2026-10-24",
+      "remainingDailyLimit": "#10000"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "beneficiaryAdded": "2026-10-23"
+    },
+    "expected": {
+      "decision": "HOLD"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "beneficiaryAdded": "2026-10-23",
+      "newBeneficiary": "NO"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "transferAmount": "20001"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "remainingDailyLimit": "#-1"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "transferAmount": "20000"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "identityVerified": "NO"
+    },
+    "expected": {
+      "decision": "HOLD"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "beneficiaryAdded": "2026-10-25"
+    },
+    "expected": {},
+    "error": true
+  }
+]
